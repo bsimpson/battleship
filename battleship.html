@@ -1,0 +1,32 @@
+<head>
+  <title>battleship</title>
+</head>
+
+<body>
+  <div class="container" id="board">
+    {{> board}}
+  </div>
+</body>
+
+<template name="board">
+  {{#each rows}}
+    {{> row}}
+  {{/each}}
+</template>
+
+<template name="row">
+  <div class="row">
+    <div class="span12">
+      <div class="row">
+    {{#each columns}}
+      {{> column}}
+    {{/each}}
+  </div>
+    </div>
+  </div>
+</template>
+
+<template name="column">
+  <div data-position="{{position}}" class="cell span1 {{selected}}">
+  </div>
+</template>
