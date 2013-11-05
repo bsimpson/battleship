@@ -3,30 +3,46 @@
 </head>
 
 <body>
-  <div class="container" id="board">
-    {{> board}}
+  <div class="container">
+    <div id="players" class="row">
+      {{> players}}
+    </div>
+    <div id="board" class="row">
+      {{> board}}
+    </div>
   </div>
 </body>
 
 <template name="board">
+  <h1>Operation Battleship!</h1>
   {{#each rows}}
-    {{> row}}
+    <div class="row">
+      {{#each cells}}
+        {{> cell}}
+      {{/each}}
+    </div>
   {{/each}}
 </template>
 
-<template name="row">
-  <div class="row">
-    <div class="span12">
-      <div class="row">
-    {{#each columns}}
-      {{> column}}
-    {{/each}}
-  </div>
-    </div>
+<template name="cell">
+  <div data-position="{{position}}"
+    class="cell span1 {{selected}}"
+    data-guesses="{{guesses}}"
+    data-hit="{{hit}}"
+  >
   </div>
 </template>
 
-<template name="column">
-  <div data-position="{{position}}" class="cell span1 {{selected}}">
-  </div>
+<template name="players">
+  <h1>Select a Player</h1>
+  {{#if player1.chosen}}
+    <button class="player" value="player1" disabled="disabled">Player 1</button>
+  {{else}}
+    <button class="player" value="player1">Player 1</button>
+  {{/if}}
+  {{#if player2.chosen}}
+    <button class="player" value="player2" disabled="disabled">Player 2</button>
+  {{else}}
+    <button class="player" value="player2">Player 2</button>
+  {{/if}}
 </template>

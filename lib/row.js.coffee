@@ -1,8 +1,10 @@
 class @Row
   constructor: (row) ->
     @row = row
-    @columns = []
+    @cells = []
 
   addColumn: (column) ->
-    column = new Column(column, @row)
-    @columns.push(column)
+    cell = new Cell
+      column: column
+      row: @row
+    @cells.push(cell)

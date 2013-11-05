@@ -2,12 +2,57 @@
 
 #board {
   .cell {
+    opacity: .5;
 
     height: 50px;
     outline: 1px solid #ccc;
 
     &.true {
+      background-color: #f1f1f1;
+    }
+
+    &[data-guesses~="player1"] {
+      background-color: green;
+    }
+
+    &[data-guesses~="player2"] {
+      background-color: blue;
+    }
+
+    &[data-guesses="both"] {
+      background: #0000ff; /* Old browsers */
+      background: -moz-linear-gradient(-45deg,  #0000ff 0%, #0000ff 50%, #008000 51%, #008000 100%); /* FF3.6+ */
+      background: -webkit-gradient(linear, left top, right bottom, color-stop(0%,#0000ff), color-stop(50%,#0000ff), color-stop(51%,#008000), color-stop(100%,#008000)); /* Chrome,Safari4+ */
+      background: -webkit-linear-gradient(-45deg,  #0000ff 0%,#0000ff 50%,#008000 51%,#008000 100%); /* Chrome10+,Safari5.1+ */
+      background: -o-linear-gradient(-45deg,  #0000ff 0%,#0000ff 50%,#008000 51%,#008000 100%); /* Opera 11.10+ */
+      background: -ms-linear-gradient(-45deg,  #0000ff 0%,#0000ff 50%,#008000 51%,#008000 100%); /* IE10+ */
+      background: linear-gradient(135deg,  #0000ff 0%,#0000ff 50%,#008000 51%,#008000 100%); /* W3C */
+      filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#0000ff', endColorstr='#008000',GradientType=1 ); /* IE6-9 fallback on horizontal gradient */
+    }
+
+    &[data-hit="true"] {
       background-color: red;
+    }
+  }
+}
+
+#players {
+  button {
+    opacity: .5;
+    color: white;
+    padding: 10px 20px;
+
+    &[value="player1"] {
+      background-color: green;
+    }
+
+    &[value="player2"] {
+      background-color: blue;
+    }
+
+    &[disabled="disabled"] {
+      opacity: .2;
+      cursor: default;
     }
   }
 }
