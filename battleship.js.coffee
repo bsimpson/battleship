@@ -17,10 +17,16 @@ if Meteor.isClient
 
   Template.cell.events
     "click .cell": (evt) =>
-      position = $(evt.target).data('position')
-      Guesses.record(position, Session.get("player"))
-      hit = Cells.isHit(position, Session.get('player'))
-      alert(if hit then 'Its a hit!' else 'You missed...')
+      if Turns.validForPlayer(Session.get("player"))
+        position = $(evt.target).data('position')
+        Guesses.record(position, Session.get("player"))
+        hit = Cells.isHit(position, Session.get('player'))
+        Turns.insert
+          player: Session.get('player')
+          createdAt: new Date()
+        alert(if hit then 'Its a hit!' else 'You missed...')
+      else
+        alert 'Its not your turn'
 
   Template.players.events
     "click .player": (evt) =>
@@ -33,6 +39,7 @@ if Meteor.isServer
     Players.remove {}
     Guesses.remove {}
     Cells.remove {}
+    Turns.remove {}
     Cells.seedShips(@player1.player)
     Cells.seedShips(@player2.player)
 
