@@ -17,7 +17,7 @@
 
 @Turns.victoryForPlayer = (player) ->
   otherPlayerShips = Cells.find(player: Players.otherPlayer(player)).fetch()
-  playerGuesses = Guesses.find(player: player).fetch()
+  playerGuesses = Turns.find(player: player).fetch()
 
   shipPositions = _(otherPlayerShips).map (ship) ->
     new Position(ship).toComparable()
@@ -26,3 +26,9 @@
     new Position(guess).toComparable()
 
   _(shipPositions).difference(playerGuessPositions).length == 0
+
+@Turns.guessed = (row, column, player) ->
+  !!@findOne
+      row: row
+      column: column
+      player: player

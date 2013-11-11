@@ -10,17 +10,18 @@ if Meteor.isClient
     board.board
 
   Template.players.player1 = ->
-    new Player(player: 'player1')
+    @player1
 
   Template.players.player2 = ->
-    new Player(player: 'player2')
+    @player2
 
   Template.cell.events
     "click .cell": (evt) =>
       if Turns.validForPlayer(Session.get("player"))
         position = $(evt.target).data('position')
-        Guesses.record(position, Session.get("player"))
         Turns.insert
+          row: position.row
+          column: position.column
           player: Session.get('player')
           createdAt: new Date()
         if Turns.victoryForPlayer1()
@@ -42,9 +43,7 @@ if Meteor.isClient
 if Meteor.isServer
   Meteor.startup ->
     Players.remove {}
-    Guesses.remove {}
     Cells.remove {}
     Turns.remove {}
     Cells.seedShips(@player1.player)
     Cells.seedShips(@player2.player)
-

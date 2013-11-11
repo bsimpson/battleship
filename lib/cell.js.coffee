@@ -15,7 +15,7 @@ class @Cell
 
   hit: ->
     otherPlayer = if (Session.get('player') == 'player1') then 'player2' else 'player1'
-    guessed = Guesses.guessed @row, @column, Session.get('player')
+    guessed = Turns.guessed @row, @column, Session.get('player')
     return false unless guessed # If they haven't guessed, we don't want to report
 
     !!Cells.findOne
@@ -25,9 +25,9 @@ class @Cell
 
   guesses: ->
     guesses = []
-    if Guesses.guessed @row, @column, 'player1'
+    if Turns.guessed @row, @column, 'player1'
       guesses.push 'player1'
-    if Guesses.guessed @row, @column, 'player2'
+    if Turns.guessed @row, @column, 'player2'
       guesses.push 'player2'
     if guesses.length > 1
       'both'

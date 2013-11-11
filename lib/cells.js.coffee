@@ -75,7 +75,8 @@
 @Cells.cheat = ->
   _([0..Board.MAX_ROW]).each (row) ->
     _([0..Board.MAX_COLUMN]).each (column) ->
-      @Guesses.insert
+      @Turns.insert
         row: row
         column: column
         player: 'player1'
+        createdAt: new Date()
