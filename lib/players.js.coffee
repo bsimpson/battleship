@@ -13,3 +13,6 @@
 @Players.chosen = (player) ->
   @findOne
     player: player
+
+@Players.otherPlayer = (player) ->
+  if player == 'player1' then 'player2' else 'player1'

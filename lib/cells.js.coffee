@@ -71,3 +71,11 @@
 
 @Cells.orientation = ->
   if (@getRandomInt(0, 1) == 0) then 'across' else 'down'
+
+@Cells.cheat = ->
+  _([0..Board.MAX_ROW]).each (row) ->
+    _([0..Board.MAX_COLUMN]).each (column) ->
+      @Guesses.insert
+        row: row
+        column: column
+        player: 'player1'

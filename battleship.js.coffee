@@ -20,11 +20,16 @@ if Meteor.isClient
       if Turns.validForPlayer(Session.get("player"))
         position = $(evt.target).data('position')
         Guesses.record(position, Session.get("player"))
-        hit = Cells.isHit(position, Session.get('player'))
         Turns.insert
           player: Session.get('player')
           createdAt: new Date()
-        alert(if hit then 'Its a hit!' else 'You missed...')
+        if Turns.victoryForPlayer1()
+          alert 'Player 1 is victorious!'
+        else if Turns.victoryForPlayer2()
+          alert 'Player 2 is victorious!'
+        else
+          hit = Cells.isHit(position, Session.get('player'))
+          alert(if hit then 'Its a hit!' else 'You missed...')
       else
         alert 'Its not your turn'
 
